@@ -42,7 +42,7 @@ export default function Bottomheader() {
 
             <div className={`
             absolute top-full  mt-3 flex flex-col left-0 bg-white text-gray-700 border-1 border-gray-400 
-            transition-all w-44 rounded duration-200 shadow-lg z-100 overflow-y-auto max-h-75
+            transition-all w-44 rounded duration-200 shadow-lg z-100 overflow-y-auto max-h-75 
             ${open ? `block ` : `hidden`}
             `}
 

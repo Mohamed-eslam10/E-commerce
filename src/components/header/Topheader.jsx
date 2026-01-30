@@ -12,7 +12,7 @@ export default function Topheader() {
                 <form action="" className='flex relative ' >
                     <input id='search' className='peer outline-none border-1 border-sky-600   bg-[#f5f5f5] p-3 h-9 sm:h-10 w-36 sm:w-50 md:w-80 rounded-l-full placeholder:text-sm text-sm placeholder:p-1' type="text" name='search' placeholder='search for products' />
                    
-                    <button className='p-3  text-sm sm:h-10 h-9 w-10 text-white bg-sky-600 rounded-r-full hover:bg-sky-700' type='submit'><FaSearch  /></button>
+                    <button className='p-3 cursor-pointer text-sm sm:h-10 h-9 w-10 text-white bg-sky-600 rounded-r-full hover:bg-sky-700' type='submit'><FaSearch  /></button>
                 </form>
                 <div className='flex gap-4 mt-2'>
                     <div className='relative'>
