@@ -28,7 +28,7 @@ export default function Bottomheader() {
   ]
   return (
     <div>
-      <div className='bg-sky-600 flex justify-around mt-4 h-10 items-center'>
+      <div className='bg-sky-600 flex justify-around mt-2 h-10 items-center'>
         <nav className=' flex gap-18 '>
 
           {/* //categories nav list// */}
