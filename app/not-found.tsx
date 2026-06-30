@@ -9,7 +9,7 @@ const NotFound = () => {
 
                         {/* 404 */}
                         <div className="mb-8">
-                            <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-bold text-black">
+                            <h1 className="text-6xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-black">
                                 404
                             </h1>
 

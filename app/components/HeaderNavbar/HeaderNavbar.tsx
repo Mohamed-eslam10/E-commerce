@@ -9,7 +9,7 @@ const Header = () => {
     { name: 'Home', path: '/' },
     { name: 'Contact', path: '/contact' },
     { name: 'About', path: '/about' },
-    { name: 'Sign UP', path: '/signUp' },
+    { name: 'Sign UP', path: '/login' },
   ]
   const pathname = usePathname();
   return (
@@ -30,11 +30,12 @@ const Header = () => {
                   <Link
 
                     href={`${item.path}`}
-                    className={`transition-all duration-200 ${pathname===item.path?"border-b-2":"border-b border-b-slate-400 hover:border-b-slate-500"} `}
+                    className={`transition-all duration-200 ${pathname===item.path?"border-b-2 border-black":"hover:border-b hover:border-b-slate-500"} `}
                   >
                     {item.name}
                   </Link>
                 </li>
+                
 
 
               )
