@@ -2,7 +2,7 @@ import { Heart, Search, ShoppingCart } from "lucide-react";
 
 const SearchNav = () => {
     return (
-        <div className="flex items-center gap-2 sm:gap-4 md:gap-5">
+        <div className="flex items-center gap-1 sm:gap-4 md:gap-5">
             <div className="relative">
                 <input
                     type="text"
