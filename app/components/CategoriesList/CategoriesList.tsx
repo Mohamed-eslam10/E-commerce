@@ -27,7 +27,7 @@ const CategoriesList =  () => {
                             key={index}
                             className="cursor-pointer rounded-md px-3 py-2 text-sm transition-colors hover:bg-gray-100 hover:text-black"
                         >
-                            <Link href={`/category/${category}`}  className="w-full">
+                            <Link href={`/category/${category}`}  className="w-full block">
                                 {category}
                             </Link>
                         </li>

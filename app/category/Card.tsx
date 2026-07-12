@@ -7,9 +7,12 @@ const Card = ({ product }: any) => {
     const [clicked, setClicked] = useState(false);
     return (
         <Link href={`/viewProduct?id=${product.id}`} >
-            <div className="group overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-xl">
+            <div className=" group overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-xl">
                 {/* Image */}
                 <div className="relative h-64 w-full overflow-hidden bg-gray-100">
+                <span className="absolute top-4 w-1/8 right-2 bg-slate-500 rounded text-center text-white text-xs  px-2 py-1 ">
+                   {product.discountPercentage.toFixed(0)}%
+                </span>
                     <Image
                         src={product.thumbnail}
                         alt={product.title}

@@ -17,7 +17,6 @@ interface Product {
     images: string[];
 }
 import Image from "next/image";
-import Link from "next/link";
 import { Heart, Star, Truck, RotateCcw } from "lucide-react";
 import RelatedProducts from "./RelatedProducts";
 
@@ -25,7 +24,7 @@ const Page = async ({ searchParams }: Props) => {
     const { id } = await searchParams;
     const res = await fetch(`https://dummyjson.com/products/${id}`);
     const data: Product = await res.json();
-    console.log(data);
+    // console.log(data);
     return (
         <main className="max-w-7xl mx-auto px-5 py-10">
 
@@ -35,10 +34,9 @@ const Page = async ({ searchParams }: Props) => {
             </div>
 
             {/* Product Section */}
-            <section className="grid gap-10 lg:grid-cols-12">
-
+            <section className="grid grid-cols-1 lg:grid-cols-12 gap-8">
                 {/* Thumbnails */}
-                <div className="lg:col-span-2 flex lg:flex-col gap-4">
+                <div className="order-2 lg:order-1 lg:col-span-2 flex lg:flex-col gap-4 overflow-x-auto lg:overflow-visible">
                     {data.images.map((item) => (
                         <div
                             key={item}
@@ -48,6 +46,7 @@ const Page = async ({ searchParams }: Props) => {
                                 src={item}
                                 alt="thumb"
                                 fill
+                                sizes="96px"
                                 className="object-contain p-2"
                             />
                         </div>
@@ -55,32 +54,30 @@ const Page = async ({ searchParams }: Props) => {
                 </div>
 
                 {/* Main Image */}
-                <div className="lg:col-span-5">
-                    <div className="relative h-[550px] rounded-2xl bg-gray-100 overflow-hidden">
-                        <Image
-                            src={data.thumbnail}
-                            alt="Product"
-                            fill
-                            className="object-contain p-8"
-                        />
+                <div className="order-1 lg:order-2 lg:col-span-5">
+                    <div className="relative h-[260px] sm:h-[420px] lg:h-[550px] rounded-2xl bg-gray-100 overflow-hidden">                        <Image
+                        src={data.thumbnail}
+                        alt="Product"
+                        fill
+                        sizes="(max-width: 1024px) 100vw, 42vw"
+
+                        className="object-contain p-8"
+                    />
                     </div>
                 </div>
 
                 {/* Product Details */}
-                <div className="lg:col-span-5">
+                <div className="order-3 lg:col-span-5">
 
-                    <h1 className="text-4xl font-bold">
+                    <h1 className="text-2xl sm:text-3xl lg:text-4xl">
                         {data.title}
                     </h1>
 
                     {/* Rating */}
-                    <div className="mt-4 flex items-center gap-3">
+                    <div className="mt-4 flex flex-wrap items-center gap-3">
 
-                        <div className="flex text-yellow-500">
-                            <Star className="fill-yellow-500" size={18} />
-                            <Star className="fill-yellow-500" size={18} />
-                            <Star className="fill-yellow-500" size={18} />
-                            <Star className="fill-yellow-500" size={18} />
+                        <div className="flex text-yellow-500 justify-around items-center gap-1">
+                            <span>{data.rating.toFixed(1)}</span>
                             <Star className="fill-yellow-500" size={18} />
                         </div>
 
@@ -92,22 +89,21 @@ const Page = async ({ searchParams }: Props) => {
                     </div>
 
                     {/* Price */}
-                    <h2 className="mt-6 text-4xl font-bold">
-                       {data.price.toFixed(2)}$
+                    <h2 className="mt-6 text-3xl lg:text-4xl font-bold">
+                        {(data.price-(data.price*data.discountPercentage)/100).toFixed(2)}$
                     </h2>
 
                     {/* Description */}
-                    <p className="mt-6 leading-8 text-gray-600">
+                    <p className="mt-6 text-sm sm:text-base leading-7 text-gray-600">
                         {data.description}
                     </p>
 
                     <hr className="my-8" />
 
-                   
-                    {/* Quantity */}
-                    <div className="mt-8 flex items-center gap-6">
 
-                        <div className="flex items-center border rounded-lg overflow-hidden">
+                    {/* Quantity */}
+                    <div className="mt-8 flex flex-wrap gap-4 items-center">
+                        <div className="flex items-center justify-center border rounded-lg overflow-hidden">
 
                             <button className="px-5 py-3 hover:bg-gray-100">
                                 -
@@ -123,11 +119,11 @@ const Page = async ({ searchParams }: Props) => {
 
                         </div>
 
-                        <button className="bg-red-500 text-white px-8 py-3 rounded-lg hover:bg-red-600 transition">
+                        <button className="bg-slate-500 text-white sm:w-auto py-3 rounded-lg hover:bg-red-600 transition flex-1 min-w-[180px]">
                             Buy Now
                         </button>
 
-                        <button className="border rounded-lg p-3 hover:bg-gray-100">
+                        <button className="h-12 w-12 border rounded-lg flex items-center justify-center">
                             <Heart />
                         </button>
 
@@ -141,7 +137,7 @@ const Page = async ({ searchParams }: Props) => {
                     {/* Delivery */}
                     <div className="mt-10 rounded-xl border">
 
-                        <div className="flex items-start gap-4 p-5">
+                        <div className="flex items-start sm:flex-row gap-4 p-5">
 
                             <Truck size={30} />
 
@@ -161,7 +157,7 @@ const Page = async ({ searchParams }: Props) => {
 
                         <hr />
 
-                        <div className="flex items-start gap-4 p-5">
+                        <div className="flex items-start sm:flex-row gap-4 p-5">
 
                             <RotateCcw size={30} />
 
