@@ -19,8 +19,11 @@ interface Product {
 import Image from "next/image";
 import { Heart, Star, Truck, RotateCcw } from "lucide-react";
 import RelatedProducts from "./RelatedProducts";
+import Quantity from "./Quantity";
+import AddToCartButton from "./AddToCartButton";
 
 const Page = async ({ searchParams }: Props) => {
+    
     const { id } = await searchParams;
     const res = await fetch(`https://dummyjson.com/products/${id}`);
     const data: Product = await res.json();
@@ -57,6 +60,7 @@ const Page = async ({ searchParams }: Props) => {
                 <div className="order-1 lg:order-2 lg:col-span-5">
                     <div className="relative h-[260px] sm:h-[420px] lg:h-[550px] rounded-2xl bg-gray-100 overflow-hidden">                        <Image
                         src={data.thumbnail}
+                        
                         alt="Product"
                         fill
                         sizes="(max-width: 1024px) 100vw, 42vw"
@@ -103,23 +107,8 @@ const Page = async ({ searchParams }: Props) => {
 
                     {/* Quantity */}
                     <div className="mt-8 flex flex-wrap gap-4 items-center">
-                        <div className="flex items-center justify-center border rounded-lg overflow-hidden">
-
-                            <button className="px-5 py-3 hover:bg-gray-100">
-                                -
-                            </button>
-
-                            <span className="px-6">
-                                1
-                            </span>
-
-                            <button className="px-5 py-3 hover:bg-gray-100">
-                                +
-                            </button>
-
-                        </div>
-
-                        <button className="bg-slate-500 text-white sm:w-auto py-3 rounded-lg hover:bg-red-600 transition flex-1 min-w-[180px]">
+                       <Quantity/>
+                        <button className="bg-slate-500 text-white sm:w-auto py-3 rounded-lg hover:bg-slate-600 cursor-pointer transition flex-1 min-w-[180px]">
                             Buy Now
                         </button>
 
@@ -130,10 +119,7 @@ const Page = async ({ searchParams }: Props) => {
                     </div>
 
                     {/* Add Cart */}
-                    <button className="mt-6 w-full rounded-lg border border-black py-4 font-semibold hover:bg-black hover:text-white transition">
-                        Add To Cart
-                    </button>
-
+                        <AddToCartButton product={data}/>
                     {/* Delivery */}
                     <div className="mt-10 rounded-xl border">
 

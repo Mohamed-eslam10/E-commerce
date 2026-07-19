@@ -1,6 +1,7 @@
 import Link from "next/link"
 import FlashSales from "./FlashSales"
 import ProductsSwiper from "./ProductsSwiper"
+import ViewProducts from "./ViewProducts"
 
 const TodayProducts = () => {
     return (
@@ -11,9 +12,8 @@ const TodayProducts = () => {
             </div>
             <FlashSales />
             <ProductsSwiper/>
-            <button className="flex justify-center w-full">
-                <Link className="p-2 bg-slate-500 hover:bg-slate-600 text-white rounded px-7 py-3 mt-5 mb-12" href={`/`}>View All Products</Link>
-            </button>
+            <ViewProducts/>
+            
         </div>
     )
 }

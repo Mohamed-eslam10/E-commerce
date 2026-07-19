@@ -6,7 +6,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
-
+import { useCartStore } from "@/app/store/cartStore";
 
 interface Product {
     id: number;
@@ -25,6 +25,7 @@ interface Props {
     products: Product[];
 }
 const SwiperOnly = ({ products }: Props) => {
+    const addToCart = useCartStore(state => state.addToCart)
     return (
         <div>
             <div className="flex justify-end gap-3 mb-6">
@@ -45,8 +46,8 @@ const SwiperOnly = ({ products }: Props) => {
                 modules={[Navigation]}
                 navigation={
                     {
-                        prevEl:".prev",
-                        nextEl:".next"
+                        prevEl: ".prev",
+                        nextEl: ".next"
                     }
                 }
                 pagination={{ clickable: true }}
@@ -93,7 +94,7 @@ const SwiperOnly = ({ products }: Props) => {
                                             </button>
 
                                             {/* يظهر في الموبايل */}
-                                            <button className="rounded-full bg-white p-2 shadow transition hover:bg-gray-100 lg:hidden">
+                                            <button onClick={()=>addToCart(product)} className="rounded-full bg-white p-2 shadow transition hover:bg-gray-100 lg:hidden">
                                                 <ShoppingCart size={18} />
                                             </button>
 
@@ -104,34 +105,35 @@ const SwiperOnly = ({ products }: Props) => {
                                             alt="Laptop"
                                             fill
                                             sizes="(max-width:640px) 100vw,
-               (max-width:1024px) 50vw,
-               25vw"
+                                                    (max-width:1024px) 50vw,
+                                                    25vw"
                                             className="object-contain p-5 transition-transform duration-300 group-hover:scale-105"
                                         />
 
                                         {/* Add To Cart */}
                                         <button
+                                            onClick={()=>addToCart(product)}        
                                             className="
-          absolute
-          bottom-0
-          left-0
-          w-full
-          bg-black
-          h-10
-          rounded
-          cursor-pointer
-          py-3
-          text-sm
-          font-medium
-          text-white
-          transition-all
-          duration-300
-          lg:translate-y-full
-          lg:group-hover:translate-y-0
-          hidden
-          lg:block
+                                            absolute
+                                              bottom-0
+                                              left-0
+                                              w-full
+                                              bg-black
+                                              h-10
+                                              rounded
+                                              cursor-pointer
+                                              py-3
+                                              text-sm
+                                              font-medium
+                                              text-white
+                                              transition-all
+                                              duration-300
+                                              lg:translate-y-full
+                                              lg:group-hover:translate-y-0
+                                              hidden
+                                              lg:block
 
-        "
+                                            "
                                         >
                                             Add To Cart
                                         </button>

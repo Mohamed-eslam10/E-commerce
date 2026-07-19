@@ -13,7 +13,7 @@ const Header = () => {
   ]
   const pathname = usePathname();
   return (
-    <header className="border-b border-gray-200">
+    <header className="border-b border-gray-200 sticky top-0 bg-white z-10">
       <div className="container flex h-20 items-center p-2 justify-around :justify-between sm:px-6">
         {/* Logo */}
         <div className="flex justify-center items-center sm:gap-5 mr-1">

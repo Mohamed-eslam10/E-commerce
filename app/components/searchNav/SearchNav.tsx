@@ -1,6 +1,9 @@
+import { useCartStore } from "@/app/store/cartStore";
 import { Heart, Search, ShoppingCart } from "lucide-react";
+import Link from "next/link";
 
 const SearchNav = () => {
+    const cartLength = useCartStore(state => state.cart.length)
     return (
         <div className="flex items-center gap-3">
             <div className="relative">
@@ -18,20 +21,22 @@ const SearchNav = () => {
             </div>
 
             <div className="flex items-center gap-2 sm:gap-4 ">
-                <div className="relative">
+                <Link
+                href="/favourite"
+                 className="relative">
                     <Heart
                         size={22}
                         className="cursor-pointer transition hover:scale-110"
                     />
-                    <span className="absolute -top-1 p-2 -right-2 flex h-1 w-1 items-center justify-center rounded-full bg-slate-500 text-xs text-white">5</span>
-                </div>
-                <div className="relative">
+                    <span className="absolute -top-1 p-2 -right-2 flex h-1 w-1 items-center justify-center rounded-full bg-slate-500 text-xs text-white">0</span>
+                </Link>
+                <Link href="/cart" className="relative">
                     <ShoppingCart
                         size={22}
                         className="cursor-pointer transition hover:scale-110"
                     />
-                    <span className="absolute -top-1 p-2 -right-2 flex h-1 w-1 items-center justify-center rounded-full bg-slate-500 text-xs text-white">5</span>
-                </div>
+                    <span className="absolute -top-1 p-2 -right-2 flex h-1 w-1 items-center justify-center rounded-full bg-slate-500 text-xs text-white">{cartLength}</span>
+                </Link>
             </div>
         </div>
     );
