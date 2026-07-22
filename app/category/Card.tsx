@@ -9,6 +9,7 @@ const Card = ({ product }: any) => {
     const addToCart = useCartStore(
         state=>state.addToCart
     )
+    const addToFavourite = useCartStore(state=>state.addToFavourite)
     return (
         <Link href={`/viewProduct?id=${product.id}`} >
             <div className=" group overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-xl">
@@ -42,7 +43,9 @@ const Card = ({ product }: any) => {
                         </span>
 
                         <span className="rounded-full bg-slate-100 cursor-pointer px-3 py-1 text-xs font-medium text-slate-700">
-                            <Heart onClick={() => { setClicked(!clicked) }} className={clicked ? "fill-red-500 text-red-500" : ""} />
+                            <Heart onClick={() => { setClicked(!clicked);
+                            addToFavourite(product)
+                             }} className={clicked ? "fill-red-500 text-red-500" : ""} />
                         </span>
                     </div>
 

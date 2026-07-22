@@ -3,7 +3,8 @@ import { Heart, Search, ShoppingCart } from "lucide-react";
 import Link from "next/link";
 
 const SearchNav = () => {
-    const cartLength = useCartStore(state => state.cart.length)
+    const cartLength = useCartStore(state => state.cart.length);
+    const favouriteLength = useCartStore(state=>state.favourite.length);
     return (
         <div className="flex items-center gap-3">
             <div className="relative">
@@ -28,7 +29,7 @@ const SearchNav = () => {
                         size={22}
                         className="cursor-pointer transition hover:scale-110"
                     />
-                    <span className="absolute -top-1 p-2 -right-2 flex h-1 w-1 items-center justify-center rounded-full bg-slate-500 text-xs text-white">0</span>
+                    <span className="absolute -top-1 p-2 -right-2 flex h-1 w-1 items-center justify-center rounded-full bg-slate-500 text-xs text-white">{favouriteLength}</span>
                 </Link>
                 <Link href="/cart" className="relative">
                     <ShoppingCart

@@ -7,6 +7,7 @@ import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import { useCartStore } from "@/app/store/cartStore";
+import { useState } from "react";
 
 interface Product {
     id: number;
@@ -25,7 +26,9 @@ interface Props {
     products: Product[];
 }
 const SwiperOnly = ({ products }: Props) => {
-    const addToCart = useCartStore(state => state.addToCart)
+    const favourite = useCartStore(state => state.favourite);
+    const addToCart = useCartStore(state => state.addToCart);
+    const addToFavourite = useCartStore(state => state.addToFavourite);
     return (
         <div>
             <div className="flex justify-end gap-3 mb-6">
@@ -63,11 +66,14 @@ const SwiperOnly = ({ products }: Props) => {
                         slidesPerView: 4,
                     },
                 }}
-
-
-            >
+                
+                
+                >
                 {
-                    products.map((product: Product) => (
+                    products.map((product: Product) => {
+                        const isFavourite = favourite.some(item => item.id === product.id)
+                        
+                        return (
                         <SwiperSlide key={product.id}>
                             <div className="w-full rounded-xl overflow-hidden bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-xl group">
 
@@ -83,8 +89,11 @@ const SwiperOnly = ({ products }: Props) => {
                                         {/* Actions */}
                                         <div className="absolute top-3 right-3 z-10 flex flex-col gap-2">
 
-                                            <button className="rounded-full bg-white p-2 shadow transition hover:bg-gray-100">
-                                                <Heart size={18} />
+                                            <button onClick={() => {
+
+                                                addToFavourite(product)
+                                            }} className={`rounded-full bg-white p-2 shadow transition hover:bg-gray-100`}>
+                                                <Heart size={18} className={`${isFavourite ? "fill-red-500 text-red-500" : "fill-white"}  cursor-pointer  `} />
                                             </button>
 
                                             <button className="rounded-full bg-white p-2 shadow transition hover:bg-gray-100">
@@ -94,7 +103,7 @@ const SwiperOnly = ({ products }: Props) => {
                                             </button>
 
                                             {/* يظهر في الموبايل */}
-                                            <button onClick={()=>addToCart(product)} className="rounded-full bg-white p-2 shadow transition hover:bg-gray-100 lg:hidden">
+                                            <button onClick={() => addToCart(product)} className="rounded-full bg-white p-2 shadow transition hover:bg-gray-100 lg:hidden">
                                                 <ShoppingCart size={18} />
                                             </button>
 
@@ -112,7 +121,7 @@ const SwiperOnly = ({ products }: Props) => {
 
                                         {/* Add To Cart */}
                                         <button
-                                            onClick={()=>addToCart(product)}        
+                                            onClick={() => addToCart(product)}
                                             className="
                                             absolute
                                               bottom-0
@@ -171,8 +180,10 @@ const SwiperOnly = ({ products }: Props) => {
 
                                 </div>
                             </div>
-                        </SwiperSlide>
-                    ))
+                        </SwiperSlide>)
+                    }
+
+                    )
                 }
 
 
