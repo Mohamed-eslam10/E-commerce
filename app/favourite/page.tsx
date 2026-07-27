@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Trash, Eye, ShoppingCart, MoveRight } from "lucide-react";
+import { Trash, Eye, ShoppingCart, MoveRight, Heart } from "lucide-react";
 import { useCartStore } from "../store/cartStore";
 
 const Page = () => {
@@ -30,7 +30,7 @@ const Page = () => {
                         href="/"
                         className="border flex gap-2 text-center border-gray-300 px-2 sm:px-6 py-3 rounded-md text-sm  hover:bg-black hover:text-white transition"
                     >
-                        Continue Shopping<MoveRight  className="hidden sm:block"/>
+                        Continue Shopping<MoveRight className="hidden sm:block" />
                     </Link>
                 </div>
 
@@ -112,11 +112,18 @@ const Page = () => {
                             ))}
                         </div>
                     ) : (
-                        <div className="flex justify-center items-center-center">
-                            <p className=" p-3  rounded text-2xl text-slate-500">Your favourite list is empty !</p>
-                    
+                        <div className="flex h-80 flex-col items-center justify-center rounded-2xl border border-dashed border-slate-300 bg-slate-50">
+                            <Heart size={60} className="text-slate-300" />
+
+                            <h2 className="mt-5 text-2xl font-semibold text-slate-700 text-center">
+                                Your favorites list is empty
+                            </h2>
+
+                            <p className="mt-2 text-center text-slate-500">
+                                Save products you love and they'll appear here.
+                            </p>
                         </div>
-                        )
+                    )
                 }
 
                 {/* كرر نفس الـ Card حسب عدد المنتجات */}

@@ -1,4 +1,4 @@
-'use client';
+
 interface Product {
     id: number;
     title: string;
@@ -12,34 +12,36 @@ interface Product {
     thumbnail: string;
 
 }
+interface SearchParams {
+    searchParams: Promise<{
+        result?: string;
+    }>
+}
 interface SearchResponse {
     products: Product[];
     skip?: number;
     total?: number;
     limit?: number;
 }
-import { useSearchParams } from "next/navigation"
-import { useEffect, useState } from "react";
 import Card from "../category/Card";
 import { Search } from "lucide-react";
 
-const page = () => {
-    const result = useSearchParams().get('result');
-    console.log(result)
+const page = async ({ searchParams }: SearchParams) => {
+    // console.log((await searchParams).result);
+    const { result = ""} = await searchParams;
+    // console.log(result)
 
 
-    const [products, setProducts] = useState<Product[]>([]);
+
+    //fetching//
+    const res = await fetch(`https://dummyjson.com/products/search?q=${encodeURIComponent(result)}`,{
+        cache:"no-store",
+    });
+    const data : SearchResponse= await res.json();
+    // console.log(data)
 
 
-    useEffect(() => {
-        if (!result) return;
-        const getResult = () => {
-            fetch(`https://dummyjson.com/products/search?q=${result}`)
-                .then(res => res.json())
-                .then((data: SearchResponse) => { setProducts(data.products) })
-        }
-        getResult();
-    }, [result]);
+
     return (
         <main className="mx-auto max-w-7xl px-4 py-10">
 
@@ -58,7 +60,7 @@ const page = () => {
                 </p>
 
                 <p className="mt-1 text-sm text-gray-400">
-                    {products?.length} Products Found
+                    {data.products.length} Products Found
                 </p>
             </div>
 
@@ -67,7 +69,7 @@ const page = () => {
             <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
 
                 {
-                    products.length > 0 ? (products.map((product: Product) => (
+                    data.products.length > 0 ? (data.products.map((product: Product) => (
 
                         <Card
                             key={product.id}

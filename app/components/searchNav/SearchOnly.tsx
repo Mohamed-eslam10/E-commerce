@@ -107,7 +107,7 @@ const SearchOnly = () => {
                     result && result.length > 0 && isOpen && (
                         <div className="absolute left-0 top-full mt-2 w-full overflow-hidden rounded-lg border border-gray-200 bg-white shadow-xl z-50 animate-in fade-in zoom-in-95
                                         duration-150">
-                            {result.slice(0, 5).map((product) => (
+                            {result.slice(0, 4).map((product) => (
                                 <Link
                                     key={product.id}
                                     href={`/viewProduct?id=${product.id}`}
