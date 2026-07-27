@@ -1,7 +1,8 @@
 'use client';
 import Image from "next/image";
 import { useCartStore } from "../store/cartStore"
-import { Trash } from "lucide-react";
+import { ShoppingCart, Trash } from "lucide-react";
+import Link from "next/link";
 
 const page = () => {
     const cart = useCartStore(
@@ -10,7 +11,7 @@ const page = () => {
     const deleteProduct = useCartStore(
         state => state.deleteFromCart
     )
-    
+
     // console.log(cart)
     return (
         <div className="max-w-7xl mx-auto px-4 md:px-6 py-8">
@@ -38,56 +39,77 @@ const page = () => {
 
 
                     {cart.length > 0 ? (
-                        <div className="bg-white rounded-2xl shadow  overflow-y-auto   max-h-80 border">
-                            {cart.map((product,index) => (
+                        <div className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-lg">
+                            {cart.map((product, index) => (
                                 <div
                                     key={index}
                                     className={`flex flex-col
-                                            md:grid
-                                            md:grid-cols-[100px_1fr_120px_120px_120px_60px]
-                                            items-center
-                                            gap-5
-                                            p-5
-                                            border-b
-                                            last:border-b-0`}
+md:grid
+md:grid-cols-[100px_1fr_120px_120px_120px_60px]
+items-center
+gap-5
+p-6
+border-b
+last:border-b-0
+transition-all
+duration-300
+hover:bg-slate-50
+hover:scale-[1.01]`}
                                 >
                                     <Image
                                         src={product.thumbnail}
                                         alt={product.title}
                                         width={90}
                                         height={90}
-                                        className="object-contain" />
+                                        className="object-contain transition duration-300 hover:scale-110" />
 
                                     <div className="text-center md:text-left">
-                                        <h2 className="font-semibold text-lg">
+                                        <h2 className="line-clamp-1 text-lg font-semibold">
                                             {product.title}
                                         </h2>
 
-                                        <p className="text-gray-500 text-sm">
-                                            Product #{product.id}
-                                        </p>
                                     </div>
-                                    <p className="font-semibold text-lg">
+                                    <p className="text-xl font-bold text-slate-800">
                                         ${product.price}
                                     </p>
 
-                                    <div className="border rounded-lg w-fit px-4 py-2">
+                                    <div className="flex items-center justify-center rounded-xl border bg-slate-50 px-4 py-2 shadow-sm">
                                         1
                                     </div>
 
-                                    <p className="font-bold text-xl text-red-500">
+                                    <p className="text-2xl font-bold text-red-500">
                                         ${product.price}
                                     </p>
 
                                     <button onClick={() => deleteProduct(product.id)} className="text-red-500 hover:text-red-700 cursor-pointer hover:scale-110 hover:rotate-10  text-xl transition">
-                                       <Trash />
+                                        <Trash />
                                     </button>
                                 </div>
                             ))}
                         </div>
                     ) : (
-                        <div className="flex justify-center items-center h-60">
-                            <p className="text-2xl text-slate-500">Your cart is empty !</p>
+                        <div className="flex flex-col items-center justify-center py-24">
+
+                            <ShoppingCart
+                                size={70}
+                                className="text-slate-300"
+                            />
+
+                            <h2 className="mt-6 text-2xl font-bold">
+                                Your cart is empty
+                            </h2>
+
+                            <p className="mt-2 text-slate-500 text-center sm:text-start">
+                                Looks like you haven't added anything yet.
+                            </p>
+
+                            <Link
+                                href="/"
+                                className="mt-6 rounded-xl bg-black px-6 py-3 text-white transition hover:bg-slate-800"
+                            >
+                                Continue Shopping
+                            </Link>
+
                         </div>
                     )}
 

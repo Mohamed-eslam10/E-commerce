@@ -18,7 +18,7 @@ const Header = () => {
         {/* Logo */}
         <div className="flex justify-center items-center sm:gap-5 mr-1">
           <MobileMenu />
-          <h1 className="sm:text-2xl hidden sm:block font-bold">Exclusive</h1>
+          <Link href="/" className="sm:text-2xl hidden sm:block font-bold">Exclusive</Link>
 
         </div>
         {/* Nav */}

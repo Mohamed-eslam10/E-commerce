@@ -1,23 +1,26 @@
 'use client';
 import Image from "next/image";
 import { Heart } from "lucide-react";
-import { useState } from "react";
 import Link from "next/link";
 import { useCartStore } from "../store/cartStore";
 const Card = ({ product }: any) => {
-    const [clicked, setClicked] = useState(false);
+
     const addToCart = useCartStore(
-        state=>state.addToCart
+        state => state.addToCart
     )
-    const addToFavourite = useCartStore(state=>state.addToFavourite)
+    const isFavourite = useCartStore(state => state.favourite.some(item => item.id === product.id))
+    // console.log(useCartStore(state=>state.favourite))
+    // console.log(isFavourite)
+
+    const addToFavourite = useCartStore(state => state.addToFavourite)
     return (
         <Link href={`/viewProduct?id=${product.id}`} >
             <div className=" group overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-xl">
                 {/* Image */}
                 <div className="relative h-64 w-full overflow-hidden bg-gray-100">
-                <span className="absolute top-4 w-1/8 right-2 bg-slate-500 rounded text-center text-white text-xs  px-2 py-1 ">
-                   {product.discountPercentage.toFixed(0)}%
-                </span>
+                    <span className="absolute top-4 w-1/8 right-2 bg-slate-500 rounded text-center text-white text-xs  px-2 py-1 flex justify-center items-center">
+                        {product.discountPercentage.toFixed(0)}%
+                    </span>
                     <Image
                         src={product.thumbnail}
                         alt={product.title}
@@ -43,9 +46,9 @@ const Card = ({ product }: any) => {
                         </span>
 
                         <span className="rounded-full bg-slate-100 cursor-pointer px-3 py-1 text-xs font-medium text-slate-700">
-                            <Heart onClick={() => { setClicked(!clicked);
-                            addToFavourite(product)
-                             }} className={clicked ? "fill-red-500 text-red-500" : ""} />
+                            <Heart onClick={() =>
+                                addToFavourite(product)
+                            } className={isFavourite ? "fill-red-500 text-red-500" : ""} />
                         </span>
                     </div>
 
@@ -55,7 +58,7 @@ const Card = ({ product }: any) => {
                             ${product.price}
                         </span>
 
-                        <button onClick={()=>addToCart(product)} className="cursor-pointer rounded-lg bg-black px-4 py-2 text-sm font-medium text-white transition hover:bg-gray-800">
+                        <button onClick={() => addToCart(product)} className="cursor-pointer rounded-lg bg-black px-4 py-2 text-sm font-medium text-white transition hover:bg-gray-800">
                             Add to Cart
                         </button>
                     </div>

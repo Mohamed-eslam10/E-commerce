@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Trash, Eye, ShoppingCart, ArrowBigRight, ArrowBigRightDashIcon, MoveRight } from "lucide-react";
+import { Trash, Eye, ShoppingCart, MoveRight } from "lucide-react";
 import { useCartStore } from "../store/cartStore";
 
 const Page = () => {
@@ -76,7 +76,7 @@ const Page = () => {
                                             className="object-contain group-hover:scale-105 transition duration-300"
                                         />
 
-                                        <button onClick={() => addToCart(product)} className="absolute cursor-pointer  bottom-0 left-0 w-full bg-black text-white py-3 flex items-center justify-center gap-2 translate-y-full group-hover:translate-y-0 transition">
+                                        <button onClick={() => addToCart(product)} className="absolute cursor-pointer  bottom-0 left-0 w-full bg-black text-white py-3 flex items-center justify-center gap-2 translate-y-full group-hover:translate-y-0 transition duration-300">
                                             <ShoppingCart size={18} />
                                             Add To Cart
                                         </button>
