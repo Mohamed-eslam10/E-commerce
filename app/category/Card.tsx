@@ -1,8 +1,9 @@
 'use client';
 import Image from "next/image";
-import { Heart } from "lucide-react";
+import { Heart, Star } from "lucide-react";
 import Link from "next/link";
 import { useCartStore } from "../store/cartStore";
+import { toast } from "react-toastify";
 const Card = ({ product }: any) => {
 
     const addToCart = useCartStore(
@@ -41,13 +42,17 @@ const Card = ({ product }: any) => {
 
                     {/* Rating */}
                     <div className="flex items-center justify-between" onClick={(e) => { e.preventDefault(); e.stopPropagation(); }}>
-                        <span className="flex items-center gap-1 text-yellow-500">
-                            ⭐ {product.rating}
+                        <span className="flex items-center gap-1 text-yellow-500 fill-red-400">
+                            <span><Star className="fill-yellow-500" /></span> {product.rating}
                         </span>
 
                         <span className="rounded-full bg-slate-100 cursor-pointer px-3 py-1 text-xs font-medium text-slate-700">
-                            <Heart onClick={() =>
-                                addToFavourite(product)
+                            <Heart onClick={() => {
+                                addToFavourite(product);
+                                toast.error('❤️ added to favourites', {
+                                    icon: false,
+                                })
+                            }
                             } className={isFavourite ? "fill-red-500 text-red-500" : ""} />
                         </span>
                     </div>
@@ -58,7 +63,11 @@ const Card = ({ product }: any) => {
                             ${product.price}
                         </span>
 
-                        <button onClick={() => addToCart(product)} className="cursor-pointer rounded-lg bg-black px-4 py-2 text-sm font-medium text-white transition hover:bg-gray-800">
+                        <button onClick={() => {
+                            addToCart(product);
+                            toast.success('added to Cart')
+
+                        }} className="cursor-pointer rounded-lg bg-black px-4 py-2 text-sm font-medium text-white transition hover:bg-gray-800">
                             Add to Cart
                         </button>
                     </div>

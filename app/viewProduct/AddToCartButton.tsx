@@ -1,4 +1,5 @@
 'use client';
+import { toast } from "react-toastify";
 import { useCartStore } from "../store/cartStore";
 
 interface Product {
@@ -15,15 +16,19 @@ interface Product {
     images: string[];
 }
 interface ButtonProduct {
-    product:Product
+    product: Product
 }
-const AddToCartButton = ({product}:ButtonProduct) => {
+const AddToCartButton = ({ product }: ButtonProduct) => {
     // console.log(props.product)
     const addToCart = useCartStore(
-        state=>state.addToCart
+        state => state.addToCart
     )
     return (
-        <button onClick={()=>addToCart(product)}  className="mt-6 w-full rounded-lg border border-black py-4 font-semibold hover:bg-black hover:text-white transition">
+        <button onClick={() => {
+            addToCart(product);
+            toast.success('added to Cart')
+
+        }} className="mt-6 w-full rounded-lg border border-black py-4 font-semibold hover:bg-black hover:text-white transition">
             Add To Cart
         </button>
 

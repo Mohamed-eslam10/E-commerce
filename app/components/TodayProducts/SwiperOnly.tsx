@@ -8,6 +8,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import { useCartStore } from "@/app/store/cartStore";
 import { useState } from "react";
+import { toast } from "react-toastify";
 
 interface Product {
     id: number;
@@ -90,7 +91,9 @@ const SwiperOnly = ({ products }: Props) => {
                                             <div className="absolute top-3 right-3 z-10 flex flex-col gap-2">
 
                                                 <button onClick={() => {
-
+                                                    toast.error('❤️ added to favourites',{
+                                                        icon:false,
+                                                    })
                                                     addToFavourite(product)
                                                 }} className={`rounded-full bg-white p-2 shadow transition hover:bg-gray-100`}>
                                                     <Heart size={18} className={`${isFavourite ? "fill-red-500 text-red-500" : "fill-white"}  cursor-pointer  `} />
@@ -103,7 +106,9 @@ const SwiperOnly = ({ products }: Props) => {
                                                 </button>
 
                                                 {/* يظهر في الموبايل */}
-                                                <button onClick={() => addToCart(product)} className="rounded-full bg-white p-2 shadow transition hover:bg-gray-100 md:hidden">
+                                                <button onClick={() => {addToCart(product);
+                                                    toast.success('added to Cart')
+                                                }} className="rounded-full bg-white p-2 shadow transition hover:bg-gray-100 md:hidden">
                                                     <ShoppingCart size={18} />
                                                 </button>
 
@@ -121,7 +126,9 @@ const SwiperOnly = ({ products }: Props) => {
 
                                             {/* Add To Cart */}
                                             <button
-                                                onClick={() => addToCart(product)}
+                                                onClick={() => {addToCart(product);
+                                                    toast.success('Added to cart ')
+                                                }}
                                                 className="
                                                   absolute
                                                   bottom-0

@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Trash, Eye, ShoppingCart, MoveRight, Heart } from "lucide-react";
 import { useCartStore } from "../store/cartStore";
+import { toast } from "react-toastify";
 
 const Page = () => {
     const favourite = useCartStore(state => state.favourite);
@@ -61,7 +62,11 @@ const Page = () => {
                                                 </Link>
                                             </button>
 
-                                            <button onClick={() => addToCart(product)} className="bg-white p-2 lg:hidden rounded-full shadow hover:bg-black hover:text-white transition cursor-pointer">
+                                            <button onClick={() => {
+                                                addToCart(product);
+                                                toast.success('added to Cart')
+
+                                            }} className="bg-white p-2 lg:hidden rounded-full shadow hover:bg-black hover:text-white transition cursor-pointer">
                                                 <ShoppingCart size={18} />
                                             </button>
 
@@ -76,7 +81,11 @@ const Page = () => {
                                             className="object-contain group-hover:scale-105 transition duration-300"
                                         />
 
-                                        <button onClick={() => addToCart(product)} className="absolute cursor-pointer  bottom-0 left-0 w-full bg-black text-white py-3 flex items-center justify-center gap-2 translate-y-full group-hover:translate-y-0 transition duration-300">
+                                        <button onClick={() => {
+                                            addToCart(product);
+                                            toast.success('added to Cart')
+
+                                        }} className="absolute cursor-pointer  bottom-0 left-0 w-full bg-black text-white py-3 flex items-center justify-center gap-2 translate-y-full group-hover:translate-y-0 transition duration-300">
                                             <ShoppingCart size={18} />
                                             Add To Cart
                                         </button>

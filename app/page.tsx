@@ -4,9 +4,9 @@ import TodayProducts from "./components/TodayProducts/TodayProducts";
 
 export default function Home() {
   return (
-   <div>
-    <HeroSec/>
-    <TodayProducts/>
-   </div>
+    <div>
+      <HeroSec />
+      <TodayProducts />
+    </div>
   );
 }

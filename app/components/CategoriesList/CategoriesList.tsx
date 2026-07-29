@@ -3,9 +3,10 @@ import axios from "axios";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { IoIosArrowUp } from "react-icons/io";
+import LoadingCategList from "./LoadingCategList";
 
 
-const CategoriesList =  () => {
+const CategoriesList = () => {
     const [open, setOpen] = useState(false);
     const [list, setList] = useState<string[]>([]);
     useEffect(() => {
@@ -17,21 +18,23 @@ const CategoriesList =  () => {
 
         fetchCategories();
     }, []);
-    
-        return (
+
+    return (
         <div>
             <aside className="hidden md:block w-full max-w-64 rounded-lg border-r bg-white p-4  overflow-y-auto max-h-80 ">
                 <ul className="space-y-2">
-                    {list.map((category, index) => (
-                        <li
-                            key={index}
-                            className="cursor-pointer rounded-md px-3 py-2 text-sm transition-colors hover:bg-gray-100 hover:text-black"
-                        >
-                            <Link href={`/category/${category}`}  className="w-full block">
-                                {category}
-                            </Link>
-                        </li>
-                    ))}
+                    {
+                        list.length > 0 ? (list.map((category, index) => (
+                            <li
+                                key={index}
+                                className="cursor-pointer rounded-md px-3 py-2 text-sm transition-colors hover:bg-gray-100 hover:text-black"
+                            >
+                                <Link href={`/category/${category}`} className="w-full block">
+                                    {category}
+                                </Link>
+                            </li>
+                        ))) : (<LoadingCategList />)
+                    }
                 </ul>
             </aside>
             {/* for the small screen */}
@@ -42,23 +45,25 @@ const CategoriesList =  () => {
                         <IoIosArrowUp className={open ? 'transition-transform rotate-180' : ''} />
                     </button>
                 </div>
-               
-                        <aside className={`${open? "shadow border border-slate-200  p-4 max-h-80 opacity-100 mt-3":" max-h-0 opacity-0 p-0 border-0 overflow-hidden"} w-full overflow-y-auto  rounded-lg border-r bg-white   transition-all duration-500 ease-in-out`}>
-                            <ul className="space-y-2">
-                                {list.map((category, index) => (
-                                    <li
-                                        key={index}
-                                        className="cursor-pointer rounded-md px-3 py-2 text-sm transition-colors hover:bg-gray-100 hover:text-black"
-                                    >
-                                        <Link href={`/category/${category}`}  className="w-full">
-                                            {category}
-                                        </Link>
-                                    </li>
-                                ))}
-                            </ul>
-                        </aside>
-                    
-               
+
+                <aside className={`${open ? "shadow border border-slate-200  p-4 max-h-80 opacity-100 mt-3" : " max-h-0 opacity-0 p-0 border-0 overflow-hidden"} w-full overflow-y-auto  rounded-lg border-r bg-white   transition-all duration-400 ease-in-out`}>
+                    <ul className="space-y-2">
+                        {
+                            list.length > 0 ? (list.map((category, index) => (
+                            <li
+                                key={index}
+                                className="cursor-pointer rounded-md px-3 py-2 text-sm transition-colors hover:bg-gray-100 hover:text-black"
+                            >
+                                <Link href={`/category/${category}`} className="w-full block">
+                                    {category}
+                                </Link>
+                            </li>
+                        ))):(<LoadingCategList/>)
+                        }
+                    </ul>
+                </aside>
+
+
             </div>
         </div>
     );

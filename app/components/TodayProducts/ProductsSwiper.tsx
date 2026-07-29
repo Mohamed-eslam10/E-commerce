@@ -15,7 +15,7 @@ interface Product {
 
 }
 const ProductsSwiper = async () => {
-    const res = await fetch('https://dummyjson.com/products?limit=200');
+    const res = await fetch('https://dummyjson.com/products?limit=220');
     const data = await res.json();
     const flashSales = data.products.sort((a :Product,b:Product)=>b.discountPercentage-a.discountPercentage).slice(20);
         // console.log(data.products[0]);

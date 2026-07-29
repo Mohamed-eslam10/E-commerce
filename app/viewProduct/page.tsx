@@ -21,12 +21,15 @@ import { Heart, Star, Truck, RotateCcw } from "lucide-react";
 import RelatedProducts from "./RelatedProducts";
 import Quantity from "./Quantity";
 import AddToCartButton from "./AddToCartButton";
+import AddToFavourite from "./AddToFavourite";
 
 const Page = async ({ searchParams }: Props) => {
     
     const { id } = await searchParams;
     const res = await fetch(`https://dummyjson.com/products/${id}`);
     const data: Product = await res.json();
+
+
     // console.log(data);
     return (
         <main className="max-w-7xl mx-auto px-5 py-10">
@@ -111,10 +114,8 @@ const Page = async ({ searchParams }: Props) => {
                         <button className="bg-slate-500 text-white sm:w-auto py-3 rounded-lg hover:bg-slate-600 cursor-pointer transition flex-1 min-w-[180px]">
                             Buy Now
                         </button>
-
-                        <button className="h-12 w-12 border rounded-lg flex items-center justify-center">
-                            <Heart />
-                        </button>
+                        <AddToFavourite product={data}/>
+                       
 
                     </div>
 

@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono,Inter } from "next/font/google";
+import { Geist, Geist_Mono, Inter } from "next/font/google";
 import "./globals.css";
 import HeaderNavbar from "./components/HeaderNavbar/HeaderNavbar";
 import Footer from "./components/Footer/Footer";
+import { ToastContainer } from "react-toastify";
 
 const geistSans = Inter({
   variable: "--font-inter",
@@ -30,10 +31,13 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col ">
-        <HeaderNavbar/> 
+        <HeaderNavbar />
         {children}
-        <Footer/>
-        </body>
+        <ToastContainer 
+        autoClose={2500}/>
+
+        <Footer />
+      </body>
     </html>
   );
 }
